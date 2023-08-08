@@ -40,23 +40,21 @@ async function promptUser() {
     switch (userInput.shape) {
         case 'circle':
             shapeInstance = new shapes.Circle();
-        break;
+            break;
         case 'triangle':
             shapeInstance = new shapes.Triangle();
-        break;
+            break;
         case 'square':
             shapeInstance = new shapes.Square();
-        break;
-    default:
-        console.log('Invalid shape selected.');
-        return;
+            break;
+        default:
+            console.log('Invalid shape selected.');
+            return;
     }
 
-    shapeInstance.setColor(userInput.shapeColor);
+    shapeInstance.setColor(userInput["shape color"]); // Use userInput["shape color"] instead of userInput.shapeColor
 
-    return {userInput, shapeInstance };
-
-    generateLogo();
+    return { userInput, shapeInstance };
 }
 
 async function generateLogo() {
@@ -64,27 +62,25 @@ async function generateLogo() {
 
     const logoSvg = `
     <svg width="300" height="200">
-        ${userInput.shapeInstance.render()}
-        <text x="50%" y="50%" text-anchor="middle" fill="${userInput.textColor}" font-size="50">${userInput.text}</text>
+    ${userInput.shapeInstance.render()}
+    <text x="50%" y="50%" text-anchor="middle" fill="${userInput.userInput["text color"]}" font-size="50">${userInput.userInput.text}</text>
     </svg>`;
 
     return logoSvg;
-
-    saveLogoToFile();
 }
 
 async function saveLogoToFile(logoSvg, filename) {
     try {
-    fs.writeFileSync(filename, logoSvg);
-    console.log(`Generated ${filename}`);
+        fs.writeFileSync(filename, logoSvg);
+        console.log(`Generated ${filename}`);
     } catch (error) {
-    console.error('Error saving SVG file:', error);
+        console.error('Error saving SVG file:', error);
     }
 }
 
-// async function main() {
-    // const logoSvg = await generateLogo();
-    // saveLogoToFile(logoSvg, 'logo.svg');
-// }
+async function main() {
+    const logoSvg = generateLogo();
+    saveLogoToFile(await logoSvg, 'logo.svg');
+}
 
-// main();
+main();
