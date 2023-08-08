@@ -12,7 +12,7 @@ What are the steps required to install your project? Provide a step-by-step desc
 
 In the integrated terminal, the application will be invoked by using the following command: 'node index.js'
 
-[Example Logo](assets/images/logo-screenshot.png)
+![Example Logo with letters RAE in green font color in the center of a black circle](assets\logo-screenshot.png)
 
 ## Credits
 
